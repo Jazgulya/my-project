@@ -1,3 +1,35 @@
 {
-  "books": []
+  "books": [
+    {
+      "title": "К себе нежно",
+      "photo": "https://cdn.book24.ru/v2/ITD000000001083100/COVER/cover13d__w410.webp",
+      "price": 720,
+      "year": "2021",
+      "chapter": "Популярная психология",
+      "description": "К себе нежно. Книга о том, как ценить и беречь себя",
+      "comments": [],
+      "id": 5
+    },
+    {
+      "title": "Унесенные ветром",
+      "photo": "https://obzor-expert.com/wp-content/uploads/2020/01/Unesennye-vetrom-768x889.jpg",
+      "price": 720,
+      "year": "2021",
+      "chapter": "Популярная психология",
+      "description": "К себе нежно. Книга о том, как ценить и беречь себя",
+      "comments": [],
+      "id": 6
+    },
+
+    {
+      "title": "Смерть на Ниле",
+      "photo": "https://www.yolabooks.ru/storage/photo/resized/xy_1732x1732/d/rggjhgn6ah79kz5_eb6d91f8.jpg",
+      "price": 720,
+      "year": "2021",
+      "chapter": "Популярная психология",
+      "description": "К себе нежно. Книга о том, как ценить и беречь себя",
+      "comments": [],
+      "id": 7
+    }
+  ]
 }
