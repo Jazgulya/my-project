@@ -18,6 +18,8 @@ import { MdDelete } from "react-icons/md";
 import { booksContext } from "../../contexts/booksContext";
 import { TbListDetails } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
+import { Box, Button } from "@mui/material";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -40,16 +42,13 @@ export default function BooksCard({ item }) {
   };
 
   return (
-    <Card style={{ marginRight: "30px" }} sx={{ maxWidth: 345 }}>
-      <CardHeader
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={item.title}
-        subheader={`год выпуска: ${item.year}`}
-      />
+    <Card
+      style={{ margin: "20px", width: "25vw", height: "30rem" }}
+      sx={{ maxWidth: 400 }}
+    >
+      <Typography fontSize={"25px"} textAlign={"center"}>
+        {item.title}
+      </Typography>
       <CardMedia
         style={{ objectFit: "contain" }}
         component="img"
@@ -68,6 +67,11 @@ export default function BooksCard({ item }) {
           {item.price}
         </Typography>
       </CardContent>
+      <Box display="flex" justifyContent={"center"}>
+        <Button variant="contained" color="success">
+          Добавить в корзину
+        </Button>
+      </Box>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
@@ -77,6 +81,9 @@ export default function BooksCard({ item }) {
         </IconButton>
         <IconButton onClick={() => deleteBook(item.id)} aria-label="delete">
           <MdDelete />
+        </IconButton>
+        <IconButton onClick={() => navigate(`/edit/${item.id}`)}>
+          <EditIcon />
         </IconButton>
         <IconButton
           onClick={() => navigate(`/books/${item.id}`)}

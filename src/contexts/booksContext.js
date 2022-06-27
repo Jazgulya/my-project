@@ -8,11 +8,16 @@ const API = "http://localhost:8000/books";
 const INIT_STATE = {
   books: [],
   oneBook: null,
+  pages: 0,
 };
 function reducer(state = INIT_STATE, action) {
   switch (action.type) {
     case "GET_BOOKS":
-      return { ...state, books: action.payload.data };
+      return {
+        ...state,
+        books: action.payload.data,
+        pages: Math.ceil(action.payload.headers["x-total-count"] / 6),
+      };
     case "GET_ONE_BOOK":
       return { ...state, oneBook: action.payload };
     default:
@@ -27,7 +32,7 @@ const BooksContextProvider = ({ children }) => {
   }
 
   async function getBooks() {
-    let res = await axios(API);
+    let res = await axios(`${API}/${window.location.search}`);
     dispatch({
       type: "GET_BOOKS",
       payload: res,
@@ -44,6 +49,9 @@ const BooksContextProvider = ({ children }) => {
       payload: res.data,
     });
   }
+  async function updateBook(id, editedBook) {
+    await axios.patch(`${API}/${id}`, editedBook);
+  }
 
   // async function createComment(id, newComment) {
   //   const res = axios.patch(`${API}/${id}`, newComment);
@@ -54,10 +62,12 @@ const BooksContextProvider = ({ children }) => {
       value={{
         books: state.books,
         oneBook: state.oneBook,
+        pages: state.pages,
         createBook,
         getBooks,
         deleteBook,
         getOneBook,
+        updateBook,
       }}
     >
       {" "}
