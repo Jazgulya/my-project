@@ -1,32 +1,47 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
+import fire from "../fire";
 export const authContext = React.createContext();
 
-const API = "https://backend-for-fs-makers.herokuapp.com/api/v1";
-
 const AuthContextProvider = ({ children }) => {
-  const [error, setError] = useState(false);
-  async function register(user, navigate) {
-    console.log(user);
-    let formData = new FormData();
-    formData.append("email", user.email);
-    formData.append("password", user.password);
-    formData.append("password_confirm", user.passwordConfirm);
-    try {
-      const res = await axios.post(`${API}/account/register/`, formData);
-      console.log(res);
-      navigate("/register-success");
-    } catch (e) {
-      setError(Object.values(e.response.data).flat(2));
-      //Object.values достает значения из объекта, flat(2) вытаскивает вложенные массивы
-    }
+  const [currentUser, setCurrentUser] = useState("");
+  const [error, setError] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+  function signUp(email, password, navigate) {
+    fire
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => navigate("/login"))
+      .catch((err) => setError(err.message));
   }
-  //   {
-  //     email: []
-  //   }
-  //   []
+  function login(email, password, navigate) {
+    fire
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => navigate("/books"))
+      .catch((err) => setError(err.message));
+  }
+  function logOut() {
+    fire.auth().signOut();
+  }
+  function authListener() {
+    fire.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // jazgul@mail.ru password 373828***
+        if (user.email === "jazgul@mail.ru" && user.password === "373828***") {
+          setIsAdmin(true);
+        }
+        setCurrentUser(user);
+      } else {
+        setCurrentUser("");
+        setIsAdmin(false);
+      }
+    });
+  }
+  useEffect(authListener, []);
   return (
-    <authContext.Provider value={{ error, register }}>
+    <authContext.Provider
+      value={{ currentUser, error, isAdmin, signUp, login, logOut }}
+    >
       {children}
     </authContext.Provider>
   );

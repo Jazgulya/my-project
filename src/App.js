@@ -6,17 +6,20 @@ import BooksContextProvider from "./contexts/booksContext";
 import Routing from "./Routing";
 import "./App.css";
 import AuthContextProvider from "./contexts/authContext";
+import { CartProvider } from "react-use-cart";
 
 const App = () => {
   return (
     <AuthContextProvider>
-      <BooksContextProvider>
-        <BrowserRouter>
-          <Header />
-          <Routing />
-          <Footer />
-        </BrowserRouter>
-      </BooksContextProvider>
+      <CartProvider>
+        <BooksContextProvider>
+          <BrowserRouter>
+            <Header />
+            <Routing />
+            <Footer />
+          </BrowserRouter>
+        </BooksContextProvider>
+      </CartProvider>
     </AuthContextProvider>
   );
 };

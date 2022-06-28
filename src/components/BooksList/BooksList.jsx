@@ -1,11 +1,12 @@
-import { Box, Container, Pagination } from "@mui/material";
+import { Box, Button, Container, Pagination } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { booksContext } from "../../contexts/booksContext";
 import BooksCard from "../BooksCard/BooksCard";
 import SearchField from "../SearchField/SearchField";
 
 const BooksList = () => {
+  const navigate = useNavigate();
   const { getBooks, books, pages } = useContext(booksContext);
   const [page, setPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -30,6 +31,15 @@ const BooksList = () => {
   return (
     <Container>
       <SearchField search={search} setSearch={setSearch} />
+      <Box margin={"15px"} display={"flex"} justifyContent={"flex-end"}>
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={() => navigate("/add-book")}
+        >
+          Добавить книгу
+        </Button>
+      </Box>
 
       <div style={{ display: "flex", margin: "40px", flexWrap: "wrap" }}>
         {books.map((item) => (

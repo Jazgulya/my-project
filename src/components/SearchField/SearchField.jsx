@@ -28,11 +28,11 @@ const SearchField = ({ search, setSearch }) => {
 
   return (
     <div className="container">
-      <form autocomplete="off">
+      <form autoComplete="off">
         <div className="finder">
           <div className="finder__outer">
             <div className="finder__inner">
-              <div className="finder__icon" createRef="icon"></div>
+              <div className="finder__icon" createref="icon"></div>
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}

@@ -20,6 +20,7 @@ import { TbListDetails } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import { Box, Button } from "@mui/material";
+import { useCart } from "react-use-cart";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -33,6 +34,7 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function BooksCard({ item }) {
+  const { addItem } = useCart();
   const { deleteBook } = React.useContext(booksContext);
   const [expanded, setExpanded] = React.useState(false);
   const navigate = useNavigate();
@@ -68,7 +70,11 @@ export default function BooksCard({ item }) {
         </Typography>
       </CardContent>
       <Box display="flex" justifyContent={"center"}>
-        <Button variant="contained" color="success">
+        <Button
+          onClick={() => addItem(item)}
+          variant="contained"
+          color="success"
+        >
           Добавить в корзину
         </Button>
       </Box>
