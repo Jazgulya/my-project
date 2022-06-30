@@ -2,50 +2,62 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
-import { Badge } from "@mui/material";
+import { Badge, Typography } from "@mui/material";
 import { useCart } from "react-use-cart";
+import "./Header.css";
+import { authContext } from "../../contexts/authContext";
 
 export default function Header() {
+  const { currentUser, logOut } = React.useContext(authContext);
   const { totalItems } = useCart();
   const navigate = useNavigate();
+  console.log(currentUser);
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
+    <Box className="header" sx={{ flexGrow: 1 }}>
+      <AppBar style={{ backgroundColor: "DarkBlue" }} position="static">
+        <Toolbar style={{ display: "flex", justifyContent: "center" }}>
+          <IconButton>
+            <img
+              style={{ width: "100px", borderRadius: "15px" }}
+              src="https://www.logolynx.com/images/logolynx/5f/5f93593ccff40cc3d07eaecc453fb3d5.jpeg"
+            />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
+
+          {currentUser ? (
+            <Button
+              onClick={() => {
+                logOut();
+                navigate("/login");
+              }}
+              color="inherit"
+            >
+              Выйти
+            </Button>
+          ) : (
+            <>
+              <Button onClick={() => navigate("/login")} color="inherit">
+                Вход
+              </Button>
+              /
+              <Button onClick={() => navigate("/register")} color="inherit">
+                Регистрация
+              </Button>
+            </>
+          )}
+
           <IconButton size="large" onClick={() => navigate("/cart")}>
             {" "}
             <Badge badgeContent={totalItems} color="error">
               <LocalMallIcon />
             </Badge>
           </IconButton>
-          <Button
-            onClick={() => navigate("/login")}
-            style={{ marginRight: "15px" }}
-            color="inherit"
-          >
-            Login
-          </Button>
-          <Button onClick={() => navigate("/register")} color="inherit">
-            Register
-          </Button>
+          <Box marginLeft={"100px"}>
+            {currentUser ? <Typography>{currentUser.email}</Typography> : null}
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>

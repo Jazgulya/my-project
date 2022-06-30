@@ -27,9 +27,10 @@ const AuthContextProvider = ({ children }) => {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
         // jazgul@mail.ru password 373828***
-        if (user.email === "jazgul@mail.ru" && user.password === "373828***") {
+        if (user.email === "jazgul@mail.ru") {
           setIsAdmin(true);
         }
+        console.log(user);
         setCurrentUser(user);
       } else {
         setCurrentUser("");

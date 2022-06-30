@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -7,10 +7,11 @@ import Typography from "@mui/material/Typography";
 import { Box, Button, Divider } from "@mui/material";
 
 const CommentsList = ({
+  setCommentEdit,
   comments,
-  getComments,
-  currentUser,
   deleteComment,
+  bookId,
+  currentUser,
 }) => {
   if (!comments) return <h2>loading</h2>;
 
@@ -24,77 +25,52 @@ const CommentsList = ({
         }}
         alignItems="flex-start"
       >
-        {comments.map((item) => (
-          <ListItemText
-            style={{ width: "100%", border: "1px solid black" }}
-            key={item.id}
-            primary="UserName"
-            secondary={
-              <React.Fragment>
-                <Typography
-                  sx={{ display: "inline" }}
-                  component="span"
-                  variant="body2"
-                  color="text.primary"
-                >
-                  {item.content}
-                </Typography>
-                <Box display={"flex"} justifyContent={"flex-end"}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    style={{ marginRight: "10px" }}
+        {comments.map((item) =>
+          bookId == item.bookId ? (
+            <ListItemText
+              style={{ width: "100%", border: "1px solid black" }}
+              key={item.id}
+              primary={currentUser.email}
+              secondary={
+                <React.Fragment>
+                  <Typography
+                    sx={{ display: "inline" }}
+                    component="span"
+                    variant="body2"
+                    color="text.primary"
                   >
-                    {" "}
-                    Edit{" "}
-                  </Button>
-                  <Button
-                    onClick={() => deleteComment(item.id)}
-                    color="error"
-                    variant="contained"
-                  >
-                    {" "}
-                    Delete{" "}
-                  </Button>
-                </Box>
-              </React.Fragment>
-            }
-          />
-        ))}
+                    {item.content}
+                  </Typography>
+                  <Box display={"flex"} justifyContent={"flex-end"}>
+                    <Button
+                      onClick={() => setCommentEdit(item)}
+                      variant="contained"
+                      color="primary"
+                      style={{ marginRight: "10px" }}
+                    >
+                      {" "}
+                      Edit{" "}
+                    </Button>
+                    <Button
+                      onClick={() => deleteComment(item.id)}
+                      color="error"
+                      variant="contained"
+                    >
+                      {" "}
+                      Delete{" "}
+                    </Button>
+                  </Box>
+                </React.Fragment>
+              }
+            />
+          ) : (
+            ""
+          )
+        )}
       </ListItem>
 
       <Divider variant="inset" component="li" />
     </List>
-    // <Container>
-    //   <TextField
-    //     value={date}
-    //     onChange={(e) => setDate(e.target.value)}
-    //     label="Раздел"
-    //     id="filled-start-adornment"
-    //     sx={{ m: 1, width: "25ch" }}
-    //     variant="filled"
-    //   />
-    //   <TextField
-    //     value={user}
-    //     onChange={(e) => setUser(e.target.value)}
-    //     label="Раздел"
-    //     id="filled-start-adornment"
-    //     sx={{ m: 1, width: "25ch" }}
-    //     variant="filled"
-    //   />
-    //   <TextField
-    //     value={comment}
-    //     onChange={(e) => setComment(e.target.value)}
-    //     label="Раздел"
-    //     id="filled-start-adornment"
-    //     sx={{ m: 1, width: "25ch" }}
-    //     variant="filled"
-    //   />
-    //   <Button variant="fill" color="success" onClick={handleValues}>
-    //     {" "}
-    //     Отправить комментарий
-    //   </Button>
-    // </Container>
   );
 };
 

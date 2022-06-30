@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -12,10 +12,9 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { booksContext } from "../../contexts/booksContext";
-import { useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { Box, Container } from "@mui/material";
 import CommentsList from "../Comments/CommentsList";
-import CommentsEdit from "../Comments/CommentsEdit";
 import CommentAdd from "../Comments/CommentAdd";
 import { commentsContext } from "../../contexts/commentsContext";
 import { authContext } from "../../contexts/authContext";
@@ -23,8 +22,9 @@ import { authContext } from "../../contexts/authContext";
 const Details = () => {
   const { currentUser } = useContext(authContext);
   const { getOneBook, oneBook } = useContext(booksContext);
-  const { createComment, comments, getComments, deleteComment } =
+  const { createComment, comments, getComments, deleteComment, updateComment } =
     useContext(commentsContext);
+  const [commentEdit, setCommentEdit] = useState(false);
   const { bookId } = useParams();
   React.useEffect(() => {
     getComments();
@@ -32,9 +32,7 @@ const Details = () => {
   React.useEffect(() => {
     getOneBook(bookId);
   }, []);
-  // useEffect(() => {
-  //   getComments();
-  // }, []);
+
   if (!oneBook) {
     return <h5>Loading</h5>;
   }
@@ -84,17 +82,35 @@ const Details = () => {
       </Card>
       <Box>
         <CommentsList
+          currentUser={currentUser}
+          commentEdit={commentEdit}
+          setCommentEdit={setCommentEdit}
+          bookId={bookId}
           comments={comments}
           getComments={getComments}
-          currentUser={currentUser}
           deleteComment={deleteComment}
         />
       </Box>
-      <Box>
-        <CommentAdd bookId={bookId} createComment={createComment} />
-      </Box>
 
-      {/* <CommentsEdit bookId={bookId} /> */}
+      {currentUser ? (
+        <Box>
+          <CommentAdd
+            currentUser={currentUser}
+            getComments={getComments}
+            commentEdit={commentEdit}
+            setCommentEdit={setCommentEdit}
+            updateComment={updateComment}
+            bookId={bookId}
+            createComment={createComment}
+          />
+        </Box>
+      ) : (
+        <Typography variant="h6">
+          {" "}
+          Если хотите оставить комментарий, необходимо{" "}
+          <Link to="/register"> зарегистрироваться </Link>
+        </Typography>
+      )}
     </Container>
   );
   //   card, other photos about book in carousel, description, field for the quantity on the page, you may also like, comments, share, rating, like, to add to cart,

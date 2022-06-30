@@ -4,7 +4,7 @@ import "./SideBar.css";
 
 const SideBar = ({ setFilter }) => {
   return (
-    <div className="sidebar">
+    <div id="sidebar">
       <Filters />
     </div>
   );

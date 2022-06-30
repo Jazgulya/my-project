@@ -35,6 +35,7 @@ const SearchField = ({ search, setSearch }) => {
               <div className="finder__icon" createref="icon"></div>
               <input
                 value={search}
+                placeholder="Поиск книг, авторов..."
                 onChange={(e) => setSearch(e.target.value)}
                 className="finder__input"
                 type="text"

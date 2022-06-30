@@ -12,8 +12,6 @@ function reducer(state = INIT_STATE, action) {
   switch (action.type) {
     case "GET_COMMENTS":
       return { ...state, comments: action.payload.data };
-    case "GET_ONE_COMMENT":
-      return { ...state, comment: action.payload };
     default:
       return state;
   }
@@ -23,6 +21,7 @@ const CommentsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
   async function createComment(newComment) {
     await axios.post(API, newComment);
+    getComments();
   }
 
   async function getComments() {
@@ -36,12 +35,9 @@ const CommentsContextProvider = ({ children }) => {
     await axios.delete(`${API}/${id}`);
     getComments();
   }
-  async function getOneComment(id) {
-    let res = await axios(`${API}/${id}`);
-    dispatch({
-      type: "GET_ONE_COMMENT",
-      payload: res.data,
-    });
+
+  async function updateComment(id, editedComment) {
+    await axios.patch(`${API}/${id}`, editedComment);
   }
   return (
     <commentsContext.Provider
@@ -51,7 +47,7 @@ const CommentsContextProvider = ({ children }) => {
         createComment,
         getComments,
         deleteComment,
-        getOneComment,
+        updateComment,
       }}
     >
       {" "}

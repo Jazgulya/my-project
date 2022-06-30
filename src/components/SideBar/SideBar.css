@@ -1,5 +1,6 @@
-.sidebar {
-  width: 200px;
+#sidebar {
+  max-width: 200px;
+  min-width: 200px;
   /* display: flex; */
   /* justify-content: flex-start; */
   height: 600px;

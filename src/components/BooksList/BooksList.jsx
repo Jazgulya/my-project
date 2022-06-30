@@ -34,7 +34,8 @@ const BooksList = () => {
   return (
     <Box display={"flex"}>
       <SideBar setFilter={setSearch} />
-      <Box>
+
+      <Box width={"100%"}>
         <Box marginTop={"10px"} display={"flex"} height={"30px"}>
           <SearchField search={search} setSearch={setSearch} />
           <Button
@@ -52,7 +53,7 @@ const BooksList = () => {
             <BooksCard key={item.id} item={item} />
           ))}
         </div>
-        <Box display={"flex"} justifyContent={"center"}>
+        <Box display={"flex"} justifyContent={"center"} width={"100%"}>
           <Pagination
             page={page}
             count={isNaN(pages) ? 0 : pages}
