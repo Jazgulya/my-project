@@ -24,8 +24,8 @@ const Login = () => {
       justifyContent={"center"}
       alignItems={"center"}
     >
-      <Typography variant="h3" component="h2">
-        Login
+      <Typography textAlign={"center"} variant="h4">
+        Вход
       </Typography>
       {error ? <Alert severity="error">{error}</Alert> : null}
       <TextField
@@ -33,15 +33,17 @@ const Login = () => {
         onChange={(e) => setEmail(e.target.value)}
         style={{ width: "40%", margin: "10px" }}
         id="outlined-basic"
-        label="Email"
+        helperText="Введите аккаунт"
+        label="Аккаунт"
         variant="outlined"
       />
       <TextField
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        style={{ width: "40%", margin: "10px" }}
+        style={{ width: "40%" }}
         id="outlined-basic"
-        label="Password"
+        label="Пароль"
+        helperText="Введите пароль"
         variant="outlined"
       />
       <Button
@@ -49,20 +51,24 @@ const Login = () => {
         style={{ width: "40%", margin: "10px" }}
         variant="contained"
       >
-        Login
+        Войти
       </Button>
-      <Typography variant="p" component="h2">
-        Don't have an account?
-      </Typography>
-      <Typography
-        variant="p"
-        color={"primary"}
-        style={{ cursor: "pointer" }}
-        component="h2"
-        onClick={() => navigate("/register")}
-      >
-        Sign up
-      </Typography>
+      <Box display={"flex"} justifyContent={"center"} marginTop={"20px"}>
+        <Typography variant="p" component="h2">
+          Нет аккаунта?
+        </Typography>
+      </Box>
+      <Box display={"flex"} justifyContent={"center"} marginTop={"10px"}>
+        <Typography
+          variant="p"
+          color={"primary"}
+          style={{ cursor: "pointer" }}
+          component="h2"
+          onClick={() => navigate("/register")}
+        >
+          Зарегистрируйтесь
+        </Typography>
+      </Box>
     </Box>
   );
 };

@@ -11,9 +11,9 @@ const INIT_STATE = {
 function reducer(state = INIT_STATE, action) {
   switch (action.type) {
     case "GET_COMMENTS":
-      return { ...state, books: action.payload.data };
+      return { ...state, comments: action.payload.data };
     case "GET_ONE_COMMENT":
-      return { ...state, book: action.payload };
+      return { ...state, comment: action.payload };
     default:
       return state;
   }

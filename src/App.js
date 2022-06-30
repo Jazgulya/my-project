@@ -7,20 +7,23 @@ import Routing from "./Routing";
 import "./App.css";
 import AuthContextProvider from "./contexts/authContext";
 import { CartProvider } from "react-use-cart";
+import CommentsContextProvider from "./contexts/commentsContext";
 
 const App = () => {
   return (
-    <AuthContextProvider>
-      <CartProvider>
+    <BrowserRouter>
+      <AuthContextProvider>
         <BooksContextProvider>
-          <BrowserRouter>
-            <Header />
-            <Routing />
-            <Footer />
-          </BrowserRouter>
+          <CommentsContextProvider>
+            <CartProvider>
+              <Header />
+              <Routing />
+              <Footer />
+            </CartProvider>
+          </CommentsContextProvider>
         </BooksContextProvider>
-      </CartProvider>
-    </AuthContextProvider>
+      </AuthContextProvider>
+    </BrowserRouter>
   );
 };
 

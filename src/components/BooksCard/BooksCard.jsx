@@ -45,7 +45,7 @@ export default function BooksCard({ item }) {
 
   return (
     <Card
-      style={{ margin: "20px", width: "25vw", height: "30rem" }}
+      style={{ margin: "10px", width: "25vw", height: "30rem" }}
       sx={{ maxWidth: 400 }}
     >
       <Typography fontSize={"25px"} textAlign={"center"}>

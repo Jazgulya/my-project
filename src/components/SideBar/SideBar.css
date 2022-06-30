@@ -1,0 +1,7 @@
+.sidebar {
+  width: 200px;
+  /* display: flex; */
+  /* justify-content: flex-start; */
+  height: 600px;
+  background-color: pink;
+}

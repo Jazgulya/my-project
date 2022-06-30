@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -13,22 +13,34 @@ import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { booksContext } from "../../contexts/booksContext";
 import { useParams } from "react-router-dom";
-import { Container } from "@mui/material";
-import Comments from "../Comments/Comments";
+import { Box, Container } from "@mui/material";
+import CommentsList from "../Comments/CommentsList";
+import CommentsEdit from "../Comments/CommentsEdit";
+import CommentAdd from "../Comments/CommentAdd";
+import { commentsContext } from "../../contexts/commentsContext";
+import { authContext } from "../../contexts/authContext";
 
 const Details = () => {
+  const { currentUser } = useContext(authContext);
   const { getOneBook, oneBook } = useContext(booksContext);
-  const { id } = useParams();
+  const { createComment, comments, getComments, deleteComment } =
+    useContext(commentsContext);
+  const { bookId } = useParams();
   React.useEffect(() => {
-    getOneBook(id);
+    getComments();
+  });
+  React.useEffect(() => {
+    getOneBook(bookId);
   }, []);
-  console.log(oneBook);
+  // useEffect(() => {
+  //   getComments();
+  // }, []);
   if (!oneBook) {
     return <h5>Loading</h5>;
   }
   return (
     <Container>
-      <Card style={{ marginRight: "30px" }} sx={{ maxWidth: 345 }}>
+      <Card style={{ margin: "30px" }} sx={{ maxWidth: 345 }}>
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -70,7 +82,19 @@ const Details = () => {
           </IconButton>
         </CardActions>
       </Card>
-      {/* <Comments /> */}
+      <Box>
+        <CommentsList
+          comments={comments}
+          getComments={getComments}
+          currentUser={currentUser}
+          deleteComment={deleteComment}
+        />
+      </Box>
+      <Box>
+        <CommentAdd bookId={bookId} createComment={createComment} />
+      </Box>
+
+      {/* <CommentsEdit bookId={bookId} /> */}
     </Container>
   );
   //   card, other photos about book in carousel, description, field for the quantity on the page, you may also like, comments, share, rating, like, to add to cart,

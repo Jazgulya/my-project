@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useReducer } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const booksContext = React.createContext();
 
@@ -18,6 +19,12 @@ function reducer(state = INIT_STATE, action) {
         books: action.payload.data,
         pages: Math.ceil(action.payload.headers["x-total-count"] / 6),
       };
+    case "FILTER_BOOKS":
+      return {
+        ...state,
+        books: action.payload.data,
+      };
+
     case "GET_ONE_BOOK":
       return { ...state, oneBook: action.payload };
     default:
@@ -27,6 +34,8 @@ function reducer(state = INIT_STATE, action) {
 
 const BooksContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
+
+  const navigate = useNavigate();
   async function createBook(newBook) {
     await axios.post(API, newBook);
   }
@@ -37,7 +46,9 @@ const BooksContextProvider = ({ children }) => {
       type: "GET_BOOKS",
       payload: res,
     });
+    console.log(res);
   }
+
   async function deleteBook(id) {
     await axios.delete(`${API}/${id}`);
     getBooks();
@@ -53,10 +64,18 @@ const BooksContextProvider = ({ children }) => {
     await axios.patch(`${API}/${id}`, editedBook);
   }
 
-  // async function createComment(id, newComment) {
-  //   const res = axios.patch(`${API}/${id}`, newComment);
-  //   console.log(res);
-  // }
+  const filterByTag = (tag, value) => {
+    const search = new URLSearchParams(window.location.search);
+    if (value === "all") {
+      search.delete(tag);
+    } else {
+      search.set(tag, value);
+    }
+
+    const url = `${window.location.pathname}?${search.toString()}`;
+    navigate(url);
+  };
+
   return (
     <booksContext.Provider
       value={{
@@ -68,6 +87,7 @@ const BooksContextProvider = ({ children }) => {
         deleteBook,
         getOneBook,
         updateBook,
+        filterByTag,
       }}
     >
       {" "}

@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import AddBook from "./components/AddBook/AddBook";
 import BooksList from "./components/BooksList/BooksList";
 import Cart from "./components/Cart/Cart";
-import Comments from "./components/Comments/Comments";
 import Details from "./components/Details/Details";
 import EditBook from "./components/EditBook/EditBook";
 import Login from "./components/Login/Login";
@@ -18,8 +17,8 @@ const Routing = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/register-success" element={<RegisterSuccess />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/books/:id" element={<Details />} />
-      <Route path="/edit/:id" element={<EditBook />} />
+      <Route path="/books/:bookId" element={<Details />} />
+      <Route path="/edit/:bookId" element={<EditBook />} />
       <Route path="/cart" element={<Cart />} />
     </Routes>
   );
