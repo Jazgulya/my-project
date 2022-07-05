@@ -134,7 +134,7 @@ const Cart = () => {
         <h2>Общая сумма : {cartTotal} </h2>
         <Box style={{ display: "flex", marginTop: "30px" }}>
           <Button
-            // onClick={() => navigate("/payment")}
+            onClick={() => navigate("/payment")}
             variant="contained"
             endIcon={<SendIcon />}
             style={{ marginRight: "15px" }}

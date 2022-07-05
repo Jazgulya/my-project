@@ -1,6 +1,8 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { Avatar, Button, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
+import { red } from "@mui/material/colors";
+import dateTime from "date-time";
 
 const CommentAdd = ({
   bookId,
@@ -9,8 +11,12 @@ const CommentAdd = ({
   setCommentEdit,
   updateComment,
   currentUser,
+  getComments,
 }) => {
   const [content, setContent] = useState("");
+
+  const currDate = new Date().toLocaleDateString();
+  const currTime = new Date().toLocaleTimeString();
 
   React.useEffect(() => {
     setContent(commentEdit.content);
@@ -21,7 +27,10 @@ const CommentAdd = ({
       content,
       bookId,
       user: currentUser.email,
+      date: currDate,
+      time: currTime,
     };
+    // console.log(newComment);
     createComment(newComment);
     setContent("");
   }
@@ -29,22 +38,25 @@ const CommentAdd = ({
   function editComment() {
     let editedComment = {
       content,
+      date: currDate,
+      time: currTime,
     };
     updateComment(commentEdit.id, editedComment);
+    getComments();
     setContent("");
   }
   return (
     <div style={{ display: "flex", marginTop: "20px" }}>
-      <Typography variant="h6"> {currentUser.email}</Typography>
       <TextField
-        style={{ flex: "1" }}
-        label="Добавить комментарий"
-        size="small"
-        variant="outlined"
-        placeholder="Добавить комментарий"
         value={content}
         onChange={(e) => setContent(e.target.value)}
+        style={{ flex: "1" }}
+        label="Добавить отзыв"
+        size="small"
+        variant="outlined"
+        placeholder="Добавить отзыв"
       />
+
       {commentEdit ? (
         <>
           <Button
@@ -58,7 +70,11 @@ const CommentAdd = ({
             Отменить
           </Button>
           <Button
-            onClick={() => editComment()}
+            onClick={() => {
+              editComment();
+              getComments();
+              setCommentEdit(false);
+            }}
             variant="contained"
             size="small"
             color="error"

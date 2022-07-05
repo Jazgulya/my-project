@@ -3,8 +3,24 @@ import TextField from "@mui/material/TextField";
 import { Alert, Box, Button, Typography } from "@mui/material";
 import { authContext } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
+import { makeStyles } from "@material-ui/core";
 
+const useStyles = makeStyles((theme) => ({
+  textField: {
+    width: 400,
+    [theme.breakpoints.down("xs")]: {
+      width: 200,
+    },
+  },
+  button: {
+    width: 300,
+    [theme.breakpoints.down("xs")]: {
+      width: 150,
+    },
+  },
+}));
 const Login = () => {
+  const classes = useStyles();
   const { login, error } = useContext(authContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -29,27 +45,30 @@ const Login = () => {
       </Typography>
       {error ? <Alert severity="error">{error}</Alert> : null}
       <TextField
+        className={classes.textField}
+        size="small"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        style={{ width: "40%", margin: "10px" }}
-        id="outlined-basic"
+        style={{ margin: "10px" }}
         helperText="Введите аккаунт"
         label="Аккаунт"
         variant="outlined"
       />
       <TextField
+        className={classes.textField}
+        size="small"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        style={{ width: "40%" }}
-        id="outlined-basic"
         label="Пароль"
         helperText="Введите пароль"
         variant="outlined"
       />
       <Button
         onClick={handleValues}
-        style={{ width: "40%", margin: "10px" }}
+        style={{ margin: "10px" }}
         variant="contained"
+        className={classes.button}
+        size="medium"
       >
         Войти
       </Button>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import fire from "../fire";
+
 export const authContext = React.createContext();
 
 const AuthContextProvider = ({ children }) => {
@@ -26,11 +27,10 @@ const AuthContextProvider = ({ children }) => {
   function authListener() {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
-        // jazgul@mail.ru password 373828***
-        if (user.email === "jazgul@mail.ru") {
+        // admin@mail.ru password 123456
+        if (user.email === "admin@mail.ru") {
           setIsAdmin(true);
         }
-        console.log(user);
         setCurrentUser(user);
       } else {
         setCurrentUser("");

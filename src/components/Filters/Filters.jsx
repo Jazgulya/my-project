@@ -1,13 +1,16 @@
-import { Button, ButtonGroup, Typography } from "@mui/material";
-import React, { useContext } from "react";
+import { Box, Button, ButtonGroup, Typography } from "@mui/material";
+import React, { useContext, useState } from "react";
 import { booksContext } from "../../contexts/booksContext";
 
 const Filters = () => {
   const { filterByTag } = useContext(booksContext);
 
   return (
-    <div>
-      <Typography> По категории</Typography>
+    <Box sx={{ flexGrow: 1, display: { xs: "none", md: "inline" } }}>
+      <Typography variant="h6" style={{ margin: "10px" }}>
+        {" "}
+        По категории
+      </Typography>
 
       <ButtonGroup
         style={{ display: "flex", flexDirection: "column" }}
@@ -30,7 +33,7 @@ const Filters = () => {
           Современная зарубежная проза
         </Button>
       </ButtonGroup>
-    </div>
+    </Box>
   );
 };
 

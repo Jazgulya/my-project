@@ -1,0 +1,5 @@
+@media (min-width: 960px) {
+  .MuiGrid-grid-md-4 {
+    flex-grow: 1;
+  }
+}

@@ -3,11 +3,14 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button, Typography } from "@mui/material";
 import { booksContext } from "../../contexts/booksContext";
+import { useNavigate } from "react-router-dom";
 
 export default function AddBook() {
+  const navigate = useNavigate();
   //title, photo, year, price, chapter
   const { createBook } = React.useContext(booksContext);
   const [title, setTitle] = React.useState();
+  const [author, setAuthor] = React.useState();
   const [photo, setPhoto] = React.useState();
   const [year, setYear] = React.useState();
   const [price, setPrice] = React.useState();
@@ -17,13 +20,28 @@ export default function AddBook() {
   function handleValues() {
     let newBook = {
       title,
+      author,
       photo,
       price,
       year,
       chapter,
       description,
     };
+    if (
+      !title ||
+      !author ||
+      !photo ||
+      !price ||
+      !year ||
+      !chapter ||
+      !description
+    ) {
+      alert("Заполните все поля!");
+      return;
+    }
     createBook(newBook);
+    navigate("/books");
+
     // console.log(newBook);
   }
   return (
@@ -35,12 +53,21 @@ export default function AddBook() {
         alignItems: "center",
       }}
     >
-      <Typography variant="h5"> Добавить новую книгу</Typography>
+      <Typography style={{ margin: "15px 0" }} variant="h5">
+        {" "}
+        Добавить новую книгу
+      </Typography>
       <TextField
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         label="Название книги"
-        id="filled-start-adornment"
+        sx={{ m: 1, width: "25ch" }}
+        variant="filled"
+      />
+      <TextField
+        value={author}
+        onChange={(e) => setAuthor(e.target.value)}
+        label="Автор книги"
         sx={{ m: 1, width: "25ch" }}
         variant="filled"
       />
@@ -80,13 +107,19 @@ export default function AddBook() {
       <TextField
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        label="Раздел"
+        label="Описание книги"
         id="filled-start-adornment"
         sx={{ m: 1, width: "25ch" }}
         variant="filled"
       />
 
-      <Button onClick={handleValues}>Add Book</Button>
+      <Button
+        style={{ marginTop: "10px" }}
+        variant="contained"
+        onClick={handleValues}
+      >
+        Добавить книгу
+      </Button>
     </Box>
   );
 }

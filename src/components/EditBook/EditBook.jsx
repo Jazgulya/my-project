@@ -9,24 +9,27 @@ export default function EditBook() {
   //title, photo, year, price, chapter
   const { getOneBook, oneBook, updateBook } = React.useContext(booksContext);
   const [title, setTitle] = React.useState();
+  const [author, setAuthor] = React.useState();
   const [photo, setPhoto] = React.useState();
   const [year, setYear] = React.useState();
   const [price, setPrice] = React.useState();
   const [chapter, setChapter] = React.useState();
   const [description, setDescription] = React.useState();
-  const { id } = useParams();
+  const { bookId } = useParams();
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    getOneBook(id);
+    getOneBook(bookId);
   }, []);
   React.useEffect(() => {
     if (oneBook) {
       setTitle(oneBook.title);
+      setAuthor(oneBook.author);
       setPhoto(oneBook.photo);
       setYear(oneBook.year);
       setPrice(oneBook.price);
       setChapter(oneBook.chapter);
+      setDescription(oneBook.description);
     }
   }, [oneBook]);
 
@@ -37,13 +40,26 @@ export default function EditBook() {
   function handleValues() {
     let editedBook = {
       title,
+      author,
       photo,
       price,
       year,
       chapter,
       description,
     };
-    updateBook(id, editedBook);
+    if (
+      !title ||
+      !author ||
+      !photo ||
+      !price ||
+      !year ||
+      !chapter ||
+      !description
+    ) {
+      alert("Заполните все поля!");
+      return;
+    }
+    updateBook(bookId, editedBook);
     navigate("/books");
     // console.log(newBook);
   }
@@ -61,6 +77,14 @@ export default function EditBook() {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         label="Название книги"
+        id="filled-start-adornment"
+        sx={{ m: 1, width: "25ch" }}
+        variant="filled"
+      />
+      <TextField
+        value={author}
+        onChange={(e) => setAuthor(e.target.value)}
+        label="Автор книги"
         id="filled-start-adornment"
         sx={{ m: 1, width: "25ch" }}
         variant="filled"
@@ -101,13 +125,15 @@ export default function EditBook() {
       <TextField
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        label="Раздел"
+        label="Описание книги"
         id="filled-start-adornment"
         sx={{ m: 1, width: "25ch" }}
         variant="filled"
       />
 
-      <Button onClick={handleValues}>Сохранить изменения</Button>
+      <Button variant="contained" onClick={handleValues}>
+        Сохранить изменения
+      </Button>
     </Box>
   );
 }

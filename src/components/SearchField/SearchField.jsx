@@ -1,51 +1,63 @@
 import React from "react";
-import "./SearchField.scss";
+import { Container } from "@mui/material";
+import { styled, alpha } from "@mui/material/styles";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
+
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.25),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(3),
+    width: "25ch",
+  },
+}));
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
+    },
+  },
+}));
 
 const SearchField = ({ search, setSearch }) => {
-  //   input.addEventListener("focus", () => {
-  //     finder.classList.add("active");
-  //   });
-
-  //   input.addEventListener("blur", () => {
-  //     if (input.value.length === 0) {
-  //       finder.classList.remove("active");
-  //     }
-  //   });
-
-  //   form.addEventListener("submit", (ev) => {
-  //     ev.preventDefault();
-  //     finder.classList.add("processing");
-  //     finder.classList.remove("active");
-  //     input.disabled = true;
-  //     setTimeout(() => {
-  //       finder.classList.remove("processing");
-  //       input.disabled = false;
-  //       if (input.value.length > 0) {
-  //         finder.classList.add("active");
-  //       }
-  //     }, 1000);
-  //   });
-
   return (
-    <div className="container">
-      <form autoComplete="off">
-        <div className="finder">
-          <div className="finder__outer">
-            <div className="finder__inner">
-              <div className="finder__icon" createref="icon"></div>
-              <input
-                value={search}
-                placeholder="Поиск книг, авторов..."
-                onChange={(e) => setSearch(e.target.value)}
-                className="finder__input"
-                type="text"
-                name="q"
-              />
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
+    <Container>
+      <Search style={{ marginTop: "20px", marginLeft: "-15px" }}>
+        <SearchIconWrapper>
+          <SearchIcon />
+        </SearchIconWrapper>
+        <StyledInputBase
+          placeholder="Поиск книг, авторов"
+          inputProps={{ "aria-label": "search" }}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </Search>
+    </Container>
   );
 };
 

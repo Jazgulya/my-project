@@ -10,6 +10,7 @@ const INIT_STATE = {
   books: [],
   oneBook: null,
   pages: 0,
+  // likes: [],
 };
 function reducer(state = INIT_STATE, action) {
   switch (action.type) {
@@ -18,11 +19,7 @@ function reducer(state = INIT_STATE, action) {
         ...state,
         books: action.payload.data,
         pages: Math.ceil(action.payload.headers["x-total-count"] / 6),
-      };
-    case "FILTER_BOOKS":
-      return {
-        ...state,
-        books: action.payload.data,
+        // likes: action.payload.data
       };
 
     case "GET_ONE_BOOK":
@@ -46,7 +43,6 @@ const BooksContextProvider = ({ children }) => {
       type: "GET_BOOKS",
       payload: res,
     });
-    console.log(res);
   }
 
   async function deleteBook(id) {
@@ -60,10 +56,13 @@ const BooksContextProvider = ({ children }) => {
       payload: res.data,
     });
   }
+
   async function updateBook(id, editedBook) {
     await axios.patch(`${API}/${id}`, editedBook);
   }
-
+  // async function addLike(id, currentUser,){
+  //   await axios.put(`${API}`.likes, currentUser)
+  // }
   const filterByTag = (tag, value) => {
     const search = new URLSearchParams(window.location.search);
     if (value === "all") {

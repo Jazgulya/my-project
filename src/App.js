@@ -8,6 +8,7 @@ import "./App.css";
 import AuthContextProvider from "./contexts/authContext";
 import { CartProvider } from "react-use-cart";
 import CommentsContextProvider from "./contexts/commentsContext";
+import FavContextProvider from "./contexts/favContext";
 
 const App = () => {
   return (
@@ -15,11 +16,13 @@ const App = () => {
       <AuthContextProvider>
         <BooksContextProvider>
           <CommentsContextProvider>
-            <CartProvider>
-              <Header />
-              <Routing />
-              <Footer />
-            </CartProvider>
+            <FavContextProvider>
+              <CartProvider>
+                <Header />
+                <Routing />
+                <Footer />
+              </CartProvider>
+            </FavContextProvider>
           </CommentsContextProvider>
         </BooksContextProvider>
       </AuthContextProvider>
