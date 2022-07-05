@@ -72,7 +72,15 @@ export default function EditBook() {
         alignItems: "center",
       }}
     >
-      <Typography variant="h5"> Редактировать книгу</Typography>
+      <Typography
+        sx={{
+          margin: "15px 0",
+          fontSize: { xs: "18px", sm: "23px", md: "27px", lg: "30px" },
+        }}
+      >
+        {" "}
+        Редактировать книгу
+      </Typography>
       <TextField
         value={title}
         onChange={(e) => setTitle(e.target.value)}

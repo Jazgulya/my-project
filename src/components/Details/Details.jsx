@@ -61,6 +61,8 @@ const Details = () => {
     return <h5>Loading</h5>;
   }
 
+  let filteredBooks = books.filter((item) => item.id != bookId);
+
   return (
     <Container>
       <Box
@@ -210,7 +212,7 @@ const Details = () => {
               Рекомендации
             </Typography>
 
-            {books?.map((item) =>
+            {filteredBooks?.map((item) =>
               item.chapter == oneBook.chapter ? (
                 <Recommendations key={item.id} item={item} />
               ) : null

@@ -40,7 +40,13 @@ const Login = () => {
       justifyContent={"center"}
       alignItems={"center"}
     >
-      <Typography textAlign={"center"} variant="h4">
+      <Typography
+        textAlign={"center"}
+        sx={{
+          fontSize: { sm: "30px", md: "40px", lg: "40px", xs: "20px" },
+        }}
+      >
+        {" "}
         Вход
       </Typography>
       {error ? <Alert severity="error">{error}</Alert> : null}
@@ -69,11 +75,21 @@ const Login = () => {
         variant="contained"
         className={classes.button}
         size="medium"
+        sx={{
+          margin: "10px",
+          fontSize: { sm: "15px", md: "15px", lg: "15px", xs: "10px" },
+        }}
       >
         Войти
       </Button>
       <Box display={"flex"} justifyContent={"center"} marginTop={"20px"}>
-        <Typography variant="p" component="h2">
+        <Typography
+          variant="p"
+          component="h2"
+          sx={{
+            fontSize: { xs: "15px", sm: "20px", md: "23px", lg: "25px" },
+          }}
+        >
           Нет аккаунта?
         </Typography>
       </Box>
@@ -81,9 +97,12 @@ const Login = () => {
         <Typography
           variant="p"
           color={"primary"}
-          style={{ cursor: "pointer" }}
           component="h2"
           onClick={() => navigate("/register")}
+          sx={{
+            cursor: "pointer",
+            fontSize: { xs: "15px", sm: "20px", md: "23px", lg: "25px" },
+          }}
         >
           Зарегистрируйтесь
         </Typography>

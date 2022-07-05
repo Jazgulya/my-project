@@ -57,7 +57,15 @@ const Register = () => {
         flexDirection={"column"}
         alignItems={"center"}
       >
-        <Typography className="typography" variant="h3" textAlign={"center"}>
+        <Typography
+          className="typography"
+          variant="h3"
+          textAlign={"center"}
+          sx={{
+            fontSize: { sm: "30px", md: "40px", lg: "40px", xs: "20px" },
+            marginTop: "15px",
+          }}
+        >
           Регистрация
         </Typography>
         {error ? <Alert severity="error">{error}</Alert> : null}
@@ -89,18 +97,30 @@ const Register = () => {
           onClick={() => handleValues()}
           variant="contained"
           color="success"
-          style={{ margin: "10px" }}
+          sx={{
+            margin: "10px",
+            fontSize: { sm: "15px", md: "15px", lg: "15px", xs: "10px" },
+          }}
         >
-          Register
+          Зарегистрироваться
         </Button>
 
         <Box display={"flex"} justifyContent={"center"} marginTop={"20px"}>
-          <Typography variant="p" component="h2">
+          <Typography
+            sx={{
+              fontSize: { xs: "15px", sm: "20px", md: "23px", lg: "25px" },
+            }}
+            variant="p"
+            component="h2"
+          >
             Уже есть аккаунт?
           </Typography>{" "}
         </Box>
         <Box display={"flex"} justifyContent={"center"} marginTop={"10px"}>
           <Typography
+            sx={{
+              fontSize: { xs: "15px", sm: "20px", md: "23px", lg: "25px" },
+            }}
             variant="p"
             color={"primary"}
             style={{ cursor: "pointer" }}

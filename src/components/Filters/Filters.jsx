@@ -32,6 +32,13 @@ const Filters = () => {
         >
           Современная зарубежная проза
         </Button>
+        <Button
+          onClick={() =>
+            filterByTag("chapter", "Романы", "Современная зарубежная проза")
+          }
+        >
+          Романы
+        </Button>
       </ButtonGroup>
     </Box>
   );

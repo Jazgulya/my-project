@@ -53,7 +53,12 @@ export default function AddBook() {
         alignItems: "center",
       }}
     >
-      <Typography style={{ margin: "15px 0" }} variant="h5">
+      <Typography
+        sx={{
+          margin: "15px 0",
+          fontSize: { xs: "18px", sm: "23px", md: "27px", lg: "30px" },
+        }}
+      >
         {" "}
         Добавить новую книгу
       </Typography>
@@ -114,7 +119,7 @@ export default function AddBook() {
       />
 
       <Button
-        style={{ marginTop: "10px" }}
+        style={{ margin: "10px 0px" }}
         variant="contained"
         onClick={handleValues}
       >

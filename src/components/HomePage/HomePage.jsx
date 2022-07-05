@@ -19,10 +19,10 @@ const HomePage = () => {
       >
         <Typography
           variant="h4"
-          style={{
+          sx={{
             fontWeight: "bold",
-
-            // fontSize: { xs: "18px", md: "22px", lg: "25px" },
+            cursor: "pointer",
+            fontSize: { xs: "18px", sm: "22px", md: "22px", lg: "25px" },
           }}
         >
           {" "}

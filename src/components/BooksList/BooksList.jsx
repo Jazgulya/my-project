@@ -51,6 +51,7 @@ const BooksList = () => {
     setSearchParams({
       q: search,
       _page: page,
+      // brand: brand,
       _limit: 6,
       price_gte: price[0],
       price_lte: price[1],
@@ -93,23 +94,27 @@ const BooksList = () => {
       <Box>
         {isAdmin ? (
           <Button
-            style={{
-              marginTop: "20px",
-              marginLeft: "10px",
-              width: "20%",
-              height: "40px",
-            }}
+            style={{}}
             color="primary"
             variant="contained"
             onClick={() => navigate("/add-book")}
+            sx={{
+              margin: "20px 0",
+              marginLeft: "10px",
+              width: "20%",
+              height: "40px",
+              fontSize: { xs: "9px", sm: "12px", md: "14px", lg: "15px" },
+            }}
           >
             Добавить книгу
           </Button>
         ) : null}
         <Typography
           textAlign={"center"}
-          variant="h4"
-          style={{ margin: "10px" }}
+          sx={{
+            margin: "10px",
+            fontSize: { xs: "22px", sm: "25px", md: "25px", lg: "30px" },
+          }}
         >
           Список книг
         </Typography>

@@ -28,10 +28,7 @@ export default function BooksCard({ item }) {
 
   return (
     <Grid item spacing={3} xs={10} sm={6} md={4}>
-      <Card
-        // sx={{ maxWidth: 300 }}
-        style={{ margin: "15px" }}
-      >
+      <Card sx={{ width: 300 }} style={{ margin: "15px" }}>
         <img
           src={item.photo}
           alt="photo book"
@@ -41,12 +38,22 @@ export default function BooksCard({ item }) {
           <CardContent>
             <Typography
               className="card-title"
-              fontSize={"25px"}
               textAlign={"center"}
+              sx={{
+                fontWeight: "bold",
+                fontSize: { xs: "18px", sm: "22px", md: "22px", lg: "25px" },
+              }}
             >
               {item.title}
             </Typography>
-            <Typography textAlign="center" variant="h6" color="text.primary">
+            <Typography
+              textAlign="center"
+              sx={{
+                fontWeight: "bold",
+                fontSize: { xs: "18px", sm: "22px", md: "22px", lg: "25px" },
+              }}
+              color="text.primary"
+            >
               {item.author}
             </Typography>
             <Typography variant="body2" color="text.secondary">
