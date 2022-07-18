@@ -4,7 +4,6 @@ import { Alert, Box, Button, Typography } from "@mui/material";
 import { authContext } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
-import { FcGoogle } from "react-icons/fc";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -20,19 +19,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-const Login = () => {
+const ForgotPassword = () => {
   const classes = useStyles();
-  const { login, error, signInWithGoogle } = useContext(authContext);
+  const { forgotPassword, error } = useContext(authContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  function handleValues() {
-    if (!email || !password) {
-      alert("Заполните поля");
-      return;
-    }
-    login(email, password, navigate);
-  }
+
   return (
     <Box
       height={"70vh"}
@@ -44,11 +37,11 @@ const Login = () => {
       <Typography
         textAlign={"center"}
         sx={{
-          fontSize: { sm: "30px", md: "40px", lg: "40px", xs: "20px" },
+          fontSize: { sm: "15px", md: "20px", lg: "30px", xs: "20px" },
         }}
       >
         {" "}
-        Вход
+        Восстановление пароля
       </Typography>
       {error ? <Alert severity="error">{error}</Alert> : null}
       <TextField
@@ -61,32 +54,9 @@ const Login = () => {
         label="Аккаунт"
         variant="outlined"
       />
-      <TextField
-        className={classes.textField}
-        size="small"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        label="Пароль"
-        helperText="Введите пароль"
-        variant="outlined"
-      />
-      <Box display={"flex"} justifyContent={"flex-end"} marginTop={"10px"}>
-        <Typography
-          variant="p"
-          color={"primary"}
-          component="h2"
-          onClick={() => navigate("/forgot-password")}
-          sx={{
-            cursor: "pointer",
-            fontSize: { xs: "8px", sm: "10px", md: "15px", lg: "15px" },
-          }}
-        >
-          Забыли пароль?
-        </Typography>
-      </Box>
+
       <Button
-        onClick={handleValues}
+        onClick={() => forgotPassword(email, navigate)}
         variant="contained"
         size="medium"
         sx={{
@@ -94,37 +64,25 @@ const Login = () => {
           fontSize: { sm: "15px", md: "15px", lg: "15px", xs: "10px" },
         }}
       >
-        Войти
+        Сбросить пароль
       </Button>
-      {/*
-       */}
-      <Box display={"flex"} justifyContent={"center"} marginTop={"20px"}>
-        <Typography
-          variant="p"
-          component="h2"
-          sx={{
-            fontSize: { xs: "15px", sm: "20px", md: "23px", lg: "25px" },
-          }}
-        >
-          Нет аккаунта?
-        </Typography>
-      </Box>
+
       <Box display={"flex"} justifyContent={"center"} marginTop={"10px"}>
         <Typography
           variant="p"
           color={"primary"}
           component="h2"
-          onClick={() => navigate("/register")}
+          onClick={() => navigate("/login")}
           sx={{
             cursor: "pointer",
             fontSize: { xs: "15px", sm: "20px", md: "23px", lg: "25px" },
           }}
         >
-          Зарегистрируйтесь
+          Войдите
         </Typography>
       </Box>
     </Box>
   );
 };
 
-export default Login;
+export default ForgotPassword;

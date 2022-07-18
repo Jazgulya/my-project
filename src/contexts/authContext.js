@@ -39,9 +39,28 @@ const AuthContextProvider = ({ children }) => {
     });
   }
   useEffect(authListener, []);
+  function forgotPassword(email, navigate) {
+    fire
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(() => navigate("/login"))
+      .catch((err) => setError(err.message));
+  }
+  // function signInWithGoogle() {
+  //   fire.auth().signInWithGoogle();
+  // }
   return (
     <authContext.Provider
-      value={{ currentUser, error, isAdmin, signUp, login, logOut }}
+      value={{
+        currentUser,
+        error,
+        isAdmin,
+        signUp,
+        login,
+        logOut,
+        forgotPassword,
+        // signInWithGoogle,
+      }}
     >
       {children}
     </authContext.Provider>

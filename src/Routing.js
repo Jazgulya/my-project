@@ -7,11 +7,11 @@ import Chat from "./components/Chat/Chat";
 import Details from "./components/Details/Details";
 import EditBook from "./components/EditBook/EditBook";
 import Favourites from "./components/Favourites/Favourites";
+import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import HomePage from "./components/HomePage/HomePage";
 import Login from "./components/Login/Login";
 import NotFound from "./components/NotFound/NotFound";
 import PaymentCard from "./components/Payment/PaymentCard";
-import Payment from "./components/Payment/PaymentCard";
 import PaymentForm from "./components/Payment/PaymentForm";
 import Register from "./components/Register/Register";
 import { authContext } from "./contexts/authContext";
@@ -50,6 +50,7 @@ const Routing = () => {
       />
       <Route path="/payment" element={<PaymentForm />} />
       <Route path="/paymentcard" element={<PaymentCard />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

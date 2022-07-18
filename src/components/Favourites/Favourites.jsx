@@ -22,6 +22,10 @@ export default function Favourites() {
   //     return <h2>Список пуст</h2>;
   //   }
   // console.log(fav.books);
+
+  if (fav?.books?.length === 0) {
+    return <Box>Ваш список пуст</Box>;
+  }
   return (
     <Container>
       {" "}

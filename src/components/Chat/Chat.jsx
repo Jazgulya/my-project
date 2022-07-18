@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Avatar, Button, Container, Grid, TextField } from "@mui/material";
 import { authContext } from "../../contexts/authContext";
 import { useCollectionData } from "react-firebase-hooks/firestore";
@@ -7,6 +7,7 @@ import firebase from "firebase/compat/app";
 import { red } from "@mui/material/colors";
 
 const Chat = () => {
+  const scroll = useRef();
   const firestore = fire.firestore();
   const { currentUser } = useContext(authContext);
   const [value, setValue] = useState("");
@@ -21,6 +22,7 @@ const Chat = () => {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setValue("");
+    scroll.current.scrollIntoView({ behavior: "smooth" });
   };
 
   if (loading) {
@@ -81,9 +83,11 @@ const Chat = () => {
                 </div>
               </Grid>
               <div style={{ marginLeft: "50px" }}>{message.text}</div>
+              <div ref={scroll}></div>
             </div>
-          ))}
+          ))}{" "}
         </div>
+
         <Grid
           container
           direction={"column"}
