@@ -158,6 +158,7 @@ const Invoice = () => {
                 </li>
               </ul>
               {/* End of Footer */}
+              <Button variant="outlined"> Edit information</Button>
             </Box>
           </>
         ) : (
