@@ -21,6 +21,9 @@ const AuthContextProvider = ({ children }) => {
       .then(() => navigate("/books"))
       .catch((err) => setError(err.message));
   }
+  // function signInWithGoogle() {
+  //   fire.auth().signInWithGoogle();
+  // }
   function logOut() {
     fire.auth().signOut();
   }
@@ -46,9 +49,7 @@ const AuthContextProvider = ({ children }) => {
       .then(() => navigate("/login"))
       .catch((err) => setError(err.message));
   }
-  // function signInWithGoogle() {
-  //   fire.auth().signInWithGoogle();
-  // }
+
   return (
     <authContext.Provider
       value={{

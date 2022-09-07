@@ -9,6 +9,7 @@ import EditBook from "./components/EditBook/EditBook";
 import Favourites from "./components/Favourites/Favourites";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import HomePage from "./components/HomePage/HomePage";
+import Invoice from "./components/Invoice/Invoice";
 import Login from "./components/Login/Login";
 import NotFound from "./components/NotFound/NotFound";
 import PaymentCard from "./components/Payment/PaymentCard";
@@ -50,6 +51,7 @@ const Routing = () => {
       />
       <Route path="/payment" element={<PaymentForm />} />
       <Route path="/paymentcard" element={<PaymentCard />} />
+      <Route path="/invoice" element={<Invoice />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
