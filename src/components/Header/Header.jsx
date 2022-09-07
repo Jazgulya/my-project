@@ -123,7 +123,7 @@ const Header = () => {
                     width: "60px",
                     borderRadius: "15px",
                   }}
-                  src="https://cdn-icons.flaticon.com/png/512/4208/premium/4208408.png?token=exp=1656916613~hmac=c82c49d97a66d8c83cc808c7e7c5a619"
+                  src="https://cdn-icons-png.flaticon.com/512/7222/7222088.png"
                 />
               </IconButton>
             </Menu>
@@ -174,10 +174,9 @@ const Header = () => {
                 className="item"
                 alt="favourites"
                 style={{
-                  width: "60px",
-                  borderRadius: "15px",
+                  width: "50px",
                 }}
-                src="https://cdn-icons.flaticon.com/png/512/4208/premium/4208408.png?token=exp=1656916613~hmac=c82c49d97a66d8c83cc808c7e7c5a619"
+                src="https://cdn-icons-png.flaticon.com/512/7222/7222088.png"
               />
             </IconButton>
           </Box>
@@ -193,8 +192,9 @@ const Header = () => {
                   }}
                 >
                   <img
-                    src="https://cdn-icons.flaticon.com/png/512/5001/premium/5001171.png?token=exp=1656915888~hmac=4d7f2c8a97e5d9f09b000205193345c8"
-                    style={{ width: "20px" }}
+                    alt="login"
+                    src="https://cdn-icons.flaticon.com/png/512/3870/premium/3870822.png?token=exp=1659345880~hmac=f314c3a6f5bbba3f7134fc078601db72"
+                    style={{ width: "50px" }}
                   />
                 </Avatar>
               </IconButton>

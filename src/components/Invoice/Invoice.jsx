@@ -1,9 +1,11 @@
-import { Box, Button, Container, TextField } from "@mui/material";
+
 import React from "react";
+import { Box, Button, Container, TextField } from "@mui/material";
+
 import { useState } from "react";
 
 const Invoice = () => {
-  const [showInvoice, setShowInvoice] = useState(true);
+  const [showInvoice, setShowInvoice] = useState(false);
   const handlePrint = () => {
     window.print();
   };

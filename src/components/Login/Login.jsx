@@ -79,8 +79,18 @@ const Login = () => {
       >
         Войти
       </Button>
-      {/*
-       */}
+      {/* <Button
+        onClick={signInWithGoogle}
+        variant="outlined"
+        size="medium"
+        sx={{
+          margin: "10px",
+          fontSize: { sm: "15px", md: "15px", lg: "15px", xs: "10px" },
+        }}
+      >
+        Войти с помощью Google
+      </Button> */}
+
       <Box display={"flex"} justifyContent={"center"} marginTop={"20px"}>
         <Typography
           variant="p"
