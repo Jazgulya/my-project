@@ -6,36 +6,14 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { makeStyles, MuiThemeProvider } from "@material-ui/core";
+// import { makeStyles, MuiThemeProvider } from "@material-ui/core";
 import React, { useContext, useState } from "react";
 import { authContext } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
-import { ClassNames } from "@emotion/react";
-import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
-const useStyles = makeStyles((theme) => ({
-  textField: {
-    width: 400,
-    [theme.breakpoints.down("xs")]: {
-      width: 200,
-    },
-  },
-  button: {
-    width: 300,
-    [theme.breakpoints.down("xs")]: {
-      width: 150,
-    },
-  },
-  typography: {
-    variant: "h3",
-    [theme.breakpoints.down("md")]: {
-      variant: "h5",
-    },
-  },
-}));
+
 
 const Register = () => {
-  const classes = useStyles();
   const { signUp, error } = useContext(authContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -58,7 +36,6 @@ const Register = () => {
         alignItems={"center"}
       >
         <Typography
-          className="typography"
           variant="h3"
           textAlign={"center"}
           sx={{
@@ -70,7 +47,6 @@ const Register = () => {
         </Typography>
         {error ? <Alert severity="error">{error}</Alert> : null}
         <TextField
-          className={classes.textField}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           style={{
@@ -82,7 +58,6 @@ const Register = () => {
           label="Аккаунт"
         />
         <TextField
-          className={classes.textField}
           size="small"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -92,7 +67,6 @@ const Register = () => {
           label="Пароль"
         />
         <Button
-          className={classes.button}
           size="medium"
           onClick={() => handleValues()}
           variant="contained"

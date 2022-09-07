@@ -6,10 +6,9 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { favContext } from "../../contexts/favContext";
 import { useNavigate } from "react-router-dom";
-import { Box, IconButton, Container } from "@mui/material";
+import { Box, IconButton, Container, Grid } from "@mui/material";
 import { MdDelete } from "react-icons/md";
 import { useCart } from "react-use-cart";
-import { Grid } from "@material-ui/core";
 
 export default function Favourites() {
   const { getFav, fav, deleteFromFav } = React.useContext(favContext);

@@ -3,25 +3,10 @@ import TextField from "@mui/material/TextField";
 import { Alert, Box, Button, Typography } from "@mui/material";
 import { authContext } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
-import { makeStyles } from "@material-ui/core";
 import { FcGoogle } from "react-icons/fc";
 
-const useStyles = makeStyles((theme) => ({
-  textField: {
-    width: 400,
-    [theme.breakpoints.down("xs")]: {
-      width: 200,
-    },
-  },
-  button: {
-    width: 300,
-    [theme.breakpoints.down("xs")]: {
-      width: 150,
-    },
-  },
-}));
+
 const Login = () => {
-  const classes = useStyles();
   const { login, error, signInWithGoogle } = useContext(authContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -52,7 +37,6 @@ const Login = () => {
       </Typography>
       {error ? <Alert severity="error">{error}</Alert> : null}
       <TextField
-        className={classes.textField}
         size="small"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -62,7 +46,6 @@ const Login = () => {
         variant="outlined"
       />
       <TextField
-        className={classes.textField}
         size="small"
         type="password"
         value={password}

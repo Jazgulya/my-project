@@ -1,6 +1,5 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
 
-import { Grid, Slider } from "@material-ui/core";
 import {
   Box,
   Button,
@@ -11,7 +10,7 @@ import {
   MenuList,
   Pagination,
   Paper,
-  Typography,
+  Typography, Slider, Grid
 } from "@mui/material";
 
 import { useNavigate, useSearchParams } from "react-router-dom";

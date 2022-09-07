@@ -1,5 +1,5 @@
-import { Slider, Typography } from "@material-ui/core";
-import { Box } from "@mui/material";
+
+import { Box, Slider, Typography } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { booksContext } from "../../contexts/booksContext";

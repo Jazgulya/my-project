@@ -3,24 +3,8 @@ import TextField from "@mui/material/TextField";
 import { Alert, Box, Button, Typography } from "@mui/material";
 import { authContext } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
-import { makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
-  textField: {
-    width: 400,
-    [theme.breakpoints.down("xs")]: {
-      width: 200,
-    },
-  },
-  button: {
-    width: 300,
-    [theme.breakpoints.down("xs")]: {
-      width: 150,
-    },
-  },
-}));
 const ForgotPassword = () => {
-  const classes = useStyles();
   const { forgotPassword, error } = useContext(authContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -45,7 +29,6 @@ const ForgotPassword = () => {
       </Typography>
       {error ? <Alert severity="error">{error}</Alert> : null}
       <TextField
-        className={classes.textField}
         size="small"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
