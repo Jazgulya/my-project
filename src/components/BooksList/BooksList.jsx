@@ -10,7 +10,7 @@ import {
   MenuList,
   Pagination,
   Paper,
-  Typography, Slider, Grid
+  Typography, Slider, Grid, Link, Breadcrumbs
 } from "@mui/material";
 
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -20,6 +20,7 @@ import BooksCard from "../BooksCard/BooksCard";
 import SearchField from "../SearchField/SearchField";
 import SideBar from "../SideBar/SideBar";
 import "./BooksList.css";
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 const BooksList = () => {
   const navigate = useNavigate();
@@ -86,28 +87,24 @@ const BooksList = () => {
 
   // return focus to the button when we transitioned from !open -> open
 
-  return (
+  return (<Container style={{ marginTop: "15px", marginLeft: "-10px" }}>
+
     <Box display={"flex"}>
+
       <SideBar price={price} setPrice={setPrice} />
 
       <Box>
-        {isAdmin ? (
-          <Button
-            style={{}}
-            color="primary"
-            variant="contained"
-            onClick={() => navigate("/add-book")}
-            sx={{
-              margin: "20px 0",
-              marginLeft: "10px",
-              width: "20%",
-              height: "40px",
-              fontSize: { xs: "9px", sm: "12px", md: "14px", lg: "15px" },
-            }}
-          >
-            Добавить книгу
-          </Button>
-        ) : null}
+        <Breadcrumbs
+          separator={<NavigateNextIcon fontSize="small" />}
+          aria-label="breadcrumb"
+        >
+          <Link style={{ cursor: "pointer" }} underline="hover" key="1" color="inherit" onClick={() => navigate("/")}>
+            Главная
+          </Link>,
+          <Typography key="2" color="text.primary">
+            Список книг
+          </Typography>
+        </Breadcrumbs>
         <Typography
           textAlign={"center"}
           sx={{
@@ -238,6 +235,7 @@ const BooksList = () => {
         </Box>
       </Box>
     </Box>
+  </Container>
   );
 };
 

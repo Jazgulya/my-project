@@ -3,8 +3,8 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import ShareIcon from "@mui/icons-material/Share";
 import { booksContext } from "../../contexts/booksContext";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { Box, Button, Container } from "@mui/material";
+import { useNavigate, useParams } from "react-router-dom";
+import { Box, Breadcrumbs, Button, Container, Link, Tooltip } from "@mui/material";
 import CommentsList from "../Comments/CommentsList";
 import CommentAdd from "../Comments/CommentAdd";
 import { commentsContext } from "../../contexts/commentsContext";
@@ -25,6 +25,8 @@ import { favContext } from "../../contexts/favContext";
 import { useCart } from "react-use-cart";
 import Recommendations from "../Recommendations/Recommendations";
 import Rating from "../Rating/Rating";
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+
 
 const Details = () => {
   const navigate = useNavigate();
@@ -66,8 +68,23 @@ const Details = () => {
   let filteredBooks = books.filter((item) => item.id != bookId);
 
   return (
-    <Container>
+    <Container style={{ marginTop: "15px" }}>
+      <Breadcrumbs
+        separator={<NavigateNextIcon fontSize="small" />}
+        aria-label="breadcrumb"
+      >
+        <Link style={{ cursor: "pointer" }} underline="hover" key="1" color="inherit" onClick={() => navigate("/")}>
+          Главная
+        </Link>,
+        <Link style={{ cursor: "pointer" }} underline="hover" key="2" color="inherit" onClick={() => navigate("/books")}>
+          Список книг
+        </Link>,
+        <Typography key="3" color="text.primary">
+          Подробнее
+        </Typography>
+      </Breadcrumbs>
       <Box>
+
         <Box
           display={"flex"}
           flexDirection={{ xs: "column", md: "row", lg: "row" }}
@@ -138,17 +155,21 @@ const Details = () => {
               Обсудить книгу онлайн
             </Button>
             <Box display={"flex"} marginTop={"15px"}>
-              <Button
-                onClick={() => {
-                  addBookToFav(oneBook);
-                  setCheckBook(checkBookInFav(oneBook));
-                }}
-              >
-                <BookmarkBorderIcon color={checkBook ? "warning" : "primary"} />
-              </Button>
-              <IconButton onClick={() => setActive(true)} aria-label="share">
-                <ShareIcon />
-              </IconButton>
+              <Tooltip title="Добавить в избранное">
+                <Button
+                  onClick={() => {
+                    addBookToFav(oneBook);
+                    setCheckBook(checkBookInFav(oneBook));
+                  }}
+                >
+                  <BookmarkBorderIcon color={checkBook ? "warning" : "primary"} />
+                </Button>
+              </Tooltip>
+              <Tooltip title="Поделиться">
+                <IconButton onClick={() => setActive(true)} aria-label="share">
+                  <ShareIcon />
+                </IconButton>
+              </Tooltip>
               <Button
                 style={{ marginLeft: "10px" }}
                 onClick={() => addItem(oneBook)}
@@ -221,7 +242,7 @@ const Details = () => {
           ) : (
             <Typography style={{ margin: "15px 0" }} variant="h6">
               Если хотите оставить отзыв, необходимо{" "}
-              <Link to="/login"> войти </Link>
+              <Button onClick={() => navigate("/login")}> войти </Button>
             </Typography>
           )}
           <CommentsList

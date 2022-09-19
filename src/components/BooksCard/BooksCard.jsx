@@ -9,7 +9,7 @@ import { booksContext } from "../../contexts/booksContext";
 import { TbListDetails, TbTypography } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Button, Grid, Tooltip } from "@mui/material";
 import { useCart } from "react-use-cart";
 import "./BooksCard.css";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
@@ -67,20 +67,25 @@ export default function BooksCard({ item }) {
             </Typography>
           </CardContent>
           <CardActions style={{ height: "20%" }}>
-            <IconButton
-              onClick={() => navigate(`/books/${item.id}`)}
-              aria-label="details"
-            >
-              <FormatAlignCenterIcon />
-            </IconButton>
-            <Button
-              onClick={() => {
-                addBookToFav(item);
-                setCheckBook(checkBookInFav(item));
-              }}
-            >
-              <BookmarkBorderIcon color={checkBook ? "warning" : "primary"} />
-            </Button>
+            <Tooltip title="Подробнее">
+              <IconButton
+                onClick={() => navigate(`/books/${item.id}`)}
+                aria-label="details"
+              >
+                <FormatAlignCenterIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Добавить в избранное">
+              <Button
+                onClick={() => {
+                  addBookToFav(item);
+                  setCheckBook(checkBookInFav(item));
+                }}
+              >
+                <BookmarkBorderIcon color={checkBook ? "warning" : "primary"} />
+              </Button>
+            </Tooltip>
+
             {isAdmin ? (
               <>
                 <IconButton onClick={() => navigate(`/edit/${item.id}`)}>

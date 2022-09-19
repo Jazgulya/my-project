@@ -3,7 +3,6 @@ import TextField from "@mui/material/TextField";
 import { Alert, Box, Button, Typography } from "@mui/material";
 import { authContext } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 
 
 const Login = () => {
@@ -19,104 +18,92 @@ const Login = () => {
     login(email, password, navigate);
   }
   return (
-    <Box
-      height={"70vh"}
-      display={"flex"}
-      flexDirection={"column"}
-      justifyContent={"center"}
-      alignItems={"center"}
-    >
-      <Typography
-        textAlign={"center"}
-        sx={{
-          fontSize: { sm: "30px", md: "40px", lg: "40px", xs: "20px" },
-        }}
+    <div style={{ backgroundColor: "#a7bcff", display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <Box
+        width={"30vw"}
+        height={"auto"}
+        display={"flex"}
+        flexDirection={"column"}
+        alignItems={"center"}
+        justifyContent={"center"}
+        backgroundColor={"white"}
+        gap={"15px"}
+        borderRadius={"15px"}
+        padding={"40px"}
+        margin={"50px 0px"}
       >
-        {" "}
-        Вход
-      </Typography>
-      {error ? <Alert severity="error">{error}</Alert> : null}
-      <TextField
-        size="small"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        style={{ margin: "10px" }}
-        helperText="Введите аккаунт"
-        label="Аккаунт"
-        variant="outlined"
-      />
-      <TextField
-        size="small"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        label="Пароль"
-        helperText="Введите пароль"
-        variant="outlined"
-      />
-      <Box display={"flex"} justifyContent={"flex-end"} marginTop={"10px"}>
-        <Typography
-          variant="p"
-          color={"primary"}
-          component="h2"
-          onClick={() => navigate("/forgot-password")}
-          sx={{
-            cursor: "pointer",
-            fontSize: { xs: "8px", sm: "10px", md: "15px", lg: "15px" },
-          }}
-        >
-          Забыли пароль?
-        </Typography>
-      </Box>
-      <Button
-        onClick={handleValues}
-        variant="contained"
-        size="medium"
-        sx={{
-          margin: "10px",
-          fontSize: { sm: "15px", md: "15px", lg: "15px", xs: "10px" },
-        }}
-      >
-        Войти
-      </Button>
-      {/* <Button
-        onClick={signInWithGoogle}
-        variant="outlined"
-        size="medium"
-        sx={{
-          margin: "10px",
-          fontSize: { sm: "15px", md: "15px", lg: "15px", xs: "10px" },
-        }}
-      >
-        Войти с помощью Google
-      </Button> */}
 
-      <Box display={"flex"} justifyContent={"center"} marginTop={"20px"}>
         <Typography
-          variant="p"
-          component="h2"
+          textAlign={"center"}
           sx={{
-            fontSize: { xs: "15px", sm: "20px", md: "23px", lg: "25px" },
+            fontSize: { sm: "25px", md: "35px", lg: "35px", xs: "15px" },
           }}
         >
-          Нет аккаунта?
+          {" "}
+          Вход
         </Typography>
-      </Box>
-      <Box display={"flex"} justifyContent={"center"} marginTop={"10px"}>
-        <Typography
-          variant="p"
-          color={"primary"}
-          component="h2"
-          onClick={() => navigate("/register")}
+        {error ? <Alert severity="error">{error}</Alert> : null}
+        <TextField fullWidth
+          size="small"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          style={{
+            margin: "10px 0",
+          }}
+          label="Аккаунт"
+          variant="outlined"
+        />
+        <TextField fullWidth
+          size="small"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          label="Пароль"
+          variant="outlined"
+        />
+
+        <Button fullWidth
+          size="medium"
+          onClick={() => handleValues()}
+          variant="contained"
+          color="warning"
           sx={{
-            cursor: "pointer",
-            fontSize: { xs: "15px", sm: "20px", md: "23px", lg: "25px" },
+            fontSize: { sm: "15px", md: "15px", lg: "15px", xs: "10px" },
           }}
         >
-          Зарегистрируйтесь
-        </Typography>
+          Войти
+        </Button>
+        <Box style={{ width: "100%", marginTop: "-8px", display: "flex", justifyContent: "flex-end" }}>
+          <Typography
+            variant="p"
+            color={"primary"}
+            component="h2"
+            onClick={() => navigate("/forgot-password")}
+            sx={{
+              cursor: "pointer",
+              fontSize: { xs: "8px", sm: "10px", md: "15px", lg: "15px" },
+            }}
+          >
+            Забыли пароль?
+          </Typography>
+        </Box>
+
+        <Box display={"flex"} justifyContent={"center"} marginTop={"10px"}>
+          <Typography
+            sx={{
+              fontSize: { xs: "12px", sm: "18px", md: "20px", lg: "20px" },
+            }}
+            variant="h6"
+            component="h4"
+          >
+            Нет аккаунта?
+          </Typography>{" "}
+        </Box>
+
+        < Button fullWidth onClick={() => navigate("/register")} variant="outlined" color="primary"> Зарегистрируйтесь</Button>
+
       </Box>
-    </Box>
+    </div >
   );
 };
 

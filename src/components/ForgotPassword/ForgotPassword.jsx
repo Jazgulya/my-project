@@ -11,60 +11,56 @@ const ForgotPassword = () => {
   const [password, setPassword] = useState("");
 
   return (
-    <Box
-      height={"70vh"}
-      display={"flex"}
-      flexDirection={"column"}
-      justifyContent={"center"}
-      alignItems={"center"}
-    >
-      <Typography
-        textAlign={"center"}
-        sx={{
-          fontSize: { sm: "15px", md: "20px", lg: "30px", xs: "20px" },
-        }}
+    <div style={{ backgroundColor: "#a7bcff", display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <Box
+        width={"30vw"}
+        height={"auto"}
+        display={"flex"}
+        flexDirection={"column"}
+        alignItems={"center"}
+        justifyContent={"center"}
+        backgroundColor={"white"}
+        gap={"15px"}
+        borderRadius={"15px"}
+        padding={"40px"}
+        margin={"50px 0px"}
       >
-        {" "}
-        Восстановление пароля
-      </Typography>
-      {error ? <Alert severity="error">{error}</Alert> : null}
-      <TextField
-        size="small"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        style={{ margin: "10px" }}
-        helperText="Введите аккаунт"
-        label="Аккаунт"
-        variant="outlined"
-      />
-
-      <Button
-        onClick={() => forgotPassword(email, navigate)}
-        variant="contained"
-        size="medium"
-        sx={{
-          margin: "10px",
-          fontSize: { sm: "15px", md: "15px", lg: "15px", xs: "10px" },
-        }}
-      >
-        Сбросить пароль
-      </Button>
-
-      <Box display={"flex"} justifyContent={"center"} marginTop={"10px"}>
         <Typography
-          variant="p"
-          color={"primary"}
-          component="h2"
-          onClick={() => navigate("/login")}
+          textAlign={"center"}
           sx={{
-            cursor: "pointer",
-            fontSize: { xs: "15px", sm: "20px", md: "23px", lg: "25px" },
+            fontSize: { sm: "15px", md: "20px", lg: "30px", xs: "20px" },
           }}
         >
-          Войдите
+          {" "}
+          Восстановление пароля
         </Typography>
+        {error ? <Alert severity="error">{error}</Alert> : null}
+        <TextField fullWidth
+          size="small"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          style={{ margin: "10px" }}
+          label="Аккаунт"
+          variant="outlined"
+        />
+
+        <Button fullWidth
+          onClick={() => forgotPassword(email, navigate)}
+          variant="outlined"
+          color="error"
+          size="medium"
+          sx={{
+            margin: "10px",
+            fontSize: { sm: "15px", md: "15px", lg: "15px", xs: "10px" },
+          }}
+        >
+          Сбросить пароль
+        </Button>
+
+        < Button fullWidth onClick={() => navigate("/login")} variant="contained" color="primary"> Войти</Button>
+
       </Box>
-    </Box>
+    </div>
   );
 };
 

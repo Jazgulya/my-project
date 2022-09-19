@@ -14,9 +14,10 @@ import "./Header.css";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../../contexts/authContext";
 import { useCart } from "react-use-cart";
+import AdminPanel from "../AdminPanel/AdminPanel";
 
 const Header = () => {
-  const { currentUser, logOut } = React.useContext(authContext);
+  const { currentUser, logOut, isAdmin } = React.useContext(authContext);
   const { totalItems } = useCart();
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -40,17 +41,19 @@ const Header = () => {
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <IconButton
-            sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-            onClick={() => navigate("/")}
-          >
-            <img
-              style={{ width: "100px", borderRadius: "15px" }}
-              alt="logo"
-              src="https://www.logolynx.com/images/logolynx/5f/5f93593ccff40cc3d07eaecc453fb3d5.jpeg"
-            />
-          </IconButton>
+        <Toolbar>
+          <Tooltip title="Главная">
+            <IconButton
+              sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+              onClick={() => navigate("/")}
+            >
+              <img
+                style={{ width: "100px", borderRadius: "15px" }}
+                alt="logo"
+                src="https://www.logolynx.com/images/logolynx/5f/5f93593ccff40cc3d07eaecc453fb3d5.jpeg"
+              />
+            </IconButton>
+          </Tooltip>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -81,12 +84,73 @@ const Header = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              <IconButton
-                sx={{
-                  display: { xs: "block", md: "none" },
-                }}
-                onClick={() => navigate("/cart")}
-              >
+              <Tooltip title="Корзина">
+                <IconButton
+                  sx={{
+                    display: { xs: "block", md: "none" },
+                  }}
+                  onClick={() => navigate("/cart")}
+                >
+                  {" "}
+                  <img
+                    className="item"
+                    style={{
+                      width: "50px",
+                      borderRadius: "15px",
+                    }}
+                    alt="Cart"
+                    src="https://cdn-icons-png.flaticon.com/512/7687/7687644.png"
+                  />{" "}
+                  <Typography
+                    style={{
+                      textAlign: "center",
+                      color: "white",
+                      position: "absolute",
+                      margin: "-65px 10px 30px 45px",
+                      fontSize: "14px",
+                      fontWeight: "400",
+                      borderRadius: "10px",
+                      borderColor: "ffffff",
+                      height: "20px",
+                      width: "20px",
+                      backgroundColor: "red",
+                    }}
+                  >
+                    {totalItems}
+                  </Typography>
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Избранное">
+                <IconButton onClick={() => navigate("/favourites")}>
+                  <img
+                    className="item"
+                    alt="favourites"
+                    style={{
+                      width: "60px",
+                      borderRadius: "15px",
+                    }}
+                    src="https://cdn-icons-png.flaticon.com/512/7222/7222088.png"
+                  />
+                </IconButton>
+              </Tooltip>
+            </Menu>
+          </Box>
+          <Tooltip title="Главная страница">
+            <IconButton
+              sx={{ display: { xs: "flex", md: "none" }, mr: 2 }}
+              onClick={() => navigate("/")}
+            >
+              <img
+                style={{ width: "90px", borderRadius: "15px" }}
+                alt="logo"
+                src="https://www.logolynx.com/images/logolynx/5f/5f93593ccff40cc3d07eaecc453fb3d5.jpeg"
+              />
+            </IconButton>
+          </Tooltip>
+
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            <Tooltip title="Корзина">
+              <IconButton onClick={() => navigate("/cart")}>
                 {" "}
                 <img
                   className="item"
@@ -102,7 +166,7 @@ const Header = () => {
                     textAlign: "center",
                     color: "white",
                     position: "absolute",
-                    margin: "-65px 10px 30px 45px",
+                    margin: "-25px 10px 30px 60px",
                     fontSize: "14px",
                     fontWeight: "400",
                     borderRadius: "10px",
@@ -115,73 +179,25 @@ const Header = () => {
                   {totalItems}
                 </Typography>
               </IconButton>
+            </Tooltip>
+            <Tooltip title="Избранное">
               <IconButton onClick={() => navigate("/favourites")}>
                 <img
                   className="item"
                   alt="favourites"
                   style={{
-                    width: "60px",
-                    borderRadius: "15px",
+                    width: "50px",
                   }}
                   src="https://cdn-icons-png.flaticon.com/512/7222/7222088.png"
                 />
               </IconButton>
-            </Menu>
+            </Tooltip>
           </Box>
-          <IconButton
-            sx={{ display: { xs: "flex", md: "none" }, mr: 2 }}
-            onClick={() => navigate("/")}
-          >
-            <img
-              style={{ width: "90px", borderRadius: "15px" }}
-              alt="logo"
-              src="https://www.logolynx.com/images/logolynx/5f/5f93593ccff40cc3d07eaecc453fb3d5.jpeg"
-            />
-          </IconButton>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <IconButton onClick={() => navigate("/cart")}>
-              {" "}
-              <img
-                className="item"
-                style={{
-                  width: "50px",
-                  borderRadius: "15px",
-                }}
-                alt="Cart"
-                src="https://cdn-icons-png.flaticon.com/512/7687/7687644.png"
-              />{" "}
-              <Typography
-                style={{
-                  textAlign: "center",
-                  color: "white",
-                  position: "absolute",
-                  margin: "-25px 10px 30px 60px",
-                  fontSize: "14px",
-                  fontWeight: "400",
-                  borderRadius: "10px",
-                  borderColor: "ffffff",
-                  height: "20px",
-                  width: "20px",
-                  backgroundColor: "red",
-                }}
-              >
-                {totalItems}
-              </Typography>
-            </IconButton>
-            <IconButton onClick={() => navigate("/favourites")}>
-              <img
-                className="item"
-                alt="favourites"
-                style={{
-                  width: "50px",
-                }}
-                src="https://cdn-icons-png.flaticon.com/512/7222/7222088.png"
-              />
-            </IconButton>
-          </Box>
+          {isAdmin ? <Button variant="outlined" style={{ color: "white", border: "1px solid white", marginRight: "15px" }} onClick={() => navigate("/admin")}> Админ панель </Button> : null}
 
           <Box sx={{ flexGrow: 0 }}>
+
+
             <Tooltip title="Аккаунт">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
@@ -193,8 +209,8 @@ const Header = () => {
                 >
                   <img
                     alt="login"
-                    src="https://cdn-icons.flaticon.com/png/512/3870/premium/3870822.png?token=exp=1659345880~hmac=f314c3a6f5bbba3f7134fc078601db72"
-                    style={{ width: "50px" }}
+                    src="https://cdn-icons-png.flaticon.com/512/1177/1177568.png"
+                    style={{ objectFit: "cover", width: "50px" }}
                   />
                 </Avatar>
               </IconButton>
@@ -265,7 +281,7 @@ const Header = () => {
           </Box>
         </Toolbar>
       </Container>
-    </AppBar>
+    </AppBar >
   );
 };
 export default Header;

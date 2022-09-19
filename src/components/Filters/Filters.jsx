@@ -1,9 +1,12 @@
 import { Box, Button, ButtonGroup, Typography } from "@mui/material";
 import React, { useContext, useState } from "react";
+import { useEffect } from "react";
 import { booksContext } from "../../contexts/booksContext";
 
 const Filters = () => {
-  const { filterByTag } = useContext(booksContext);
+  const { filterByTag, books, getBooks } = useContext(booksContext);
+  useEffect(() => { getBooks() }, [])
+
 
   return (
     <Box sx={{ flexGrow: 1, display: { xs: "none", md: "inline" } }}>
@@ -18,7 +21,7 @@ const Filters = () => {
         aria-label="outlined primary button group"
       >
         <Button onClick={() => filterByTag("chapter", "all")}>Все</Button>
-        <Button onClick={() => filterByTag("chapter", "Популярная психология")}>
+        {/* <Button onClick={() => filterByTag("chapter", "Популярная психология")}>
           Популярная психология
         </Button>
         <Button onClick={() => filterByTag("chapter", "Детективы")}>
@@ -34,11 +37,13 @@ const Filters = () => {
         </Button>
         <Button
           onClick={() =>
-            filterByTag("chapter", "Романы", "Современная зарубежная проза")
+            filterByTag("chapter", "Романы")
           }
         >
           Романы
-        </Button>
+        </Button> */}
+        {books?.map((item) =>
+          <Button key={item.id} onClick={() => filterByTag("chapter", `${item?.chapter}`)}>{item?.chapter}</Button>)}
       </ButtonGroup>
     </Box>
   );

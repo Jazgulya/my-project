@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import AddBook from "./components/AddBook/AddBook";
+import AdminPanel from "./components/AdminPanel/AdminPanel";
 import BooksList from "./components/BooksList/BooksList";
 import Cart from "./components/Cart/Cart";
 import Chat from "./components/Chat/Chat";
@@ -22,38 +23,45 @@ const Routing = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route
-        path="/add-book"
-        element={isAdmin ? <AddBook /> : <Navigate replace to="*" />}
-      />
+
       <Route path="/books" element={<BooksList />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/books/:bookId" element={<Details />} />
+      {isAdmin ? <><Route
+        path="/admin"
+        element={<AdminPanel />}
+      />
+        <Route
+          path="/edit/:bookId"
+          element={<EditBook />}
+        />
+
+        <Route
+          path="/add-book"
+          element={<AddBook />}
+        /></> : null}
 
       <Route
-        path="/edit/:bookId"
-        element={isAdmin ? <EditBook /> : <Navigate replace to="*" />}
-      />
-      <Route
-        path="/cart"
-        element={currentUser ? <Cart /> : <Navigate replace to="/login" />}
-      />
-      <Route
         path="/chat"
-        element={currentUser ? <Chat /> : <Navigate replace to="/login" />}
+        element={<Chat />}
       />
-      <Route
-        path="/favourites"
-        element={
-          currentUser ? <Favourites /> : <Navigate replace to="/login" />
-        }
-      />
+      {currentUser ? <>
+        <Route
+          path="/cart"
+          element={<Cart />} />
+
+        <Route
+          path="/favourites"
+          element={<Favourites />}
+        /></> : null}
+
       <Route path="/payment" element={<PaymentForm />} />
       <Route path="/paymentcard" element={<PaymentCard />} />
       <Route path="/invoice" element={<Invoice />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="*" element={<NotFound />} />
+
     </Routes>
   );
 };

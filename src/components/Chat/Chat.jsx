@@ -23,6 +23,7 @@ const Chat = () => {
     });
     setValue("");
     scroll.current.scrollIntoView({ behavior: "smooth" });
+    console.log(messages);
   };
 
   if (loading) {
@@ -44,13 +45,13 @@ const Chat = () => {
           }}
         >
           {" "}
-          {messages.map((message) => (
-            <div
+          {messages?.map((message) => (
+            < div
               style={{
                 width: "30%",
                 margin: "10px",
                 border:
-                  currentUser.uid === message.uid
+                  currentUser?.uid === message.uid
                     ? "2px solid green"
                     : "2px dashed red",
                 marginLeft: currentUser.uid === message.uid ? "auto" : "10px",
@@ -106,7 +107,7 @@ const Chat = () => {
           </Button>
         </Grid>
       </Grid>
-    </Container>
+    </Container >
   );
 };
 

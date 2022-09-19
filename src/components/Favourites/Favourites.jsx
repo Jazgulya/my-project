@@ -6,9 +6,10 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { favContext } from "../../contexts/favContext";
 import { useNavigate } from "react-router-dom";
-import { Box, IconButton, Container, Grid } from "@mui/material";
+import { Box, IconButton, Container, Grid, Link, Breadcrumbs } from "@mui/material";
 import { MdDelete } from "react-icons/md";
 import { useCart } from "react-use-cart";
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 export default function Favourites() {
   const { getFav, fav, deleteFromFav } = React.useContext(favContext);
@@ -25,9 +26,24 @@ export default function Favourites() {
   if (fav?.books?.length === 0) {
     return <Box>Ваш список пуст</Box>;
   }
+
   return (
-    <Container>
-      {" "}
+    <Container style={{ marginTop: "15px" }}>
+
+      <Breadcrumbs
+        separator={<NavigateNextIcon fontSize="small" />}
+        aria-label="breadcrumb"
+      >
+        <Link style={{ cursor: "pointer" }} underline="hover" key="1" color="inherit" onClick={() => navigate("/")}>
+          Главная
+        </Link>,
+        <Link style={{ cursor: "pointer" }} underline="hover" key="1" color="inherit" onClick={() => navigate("/books")}>
+          Список книг
+        </Link>,
+        <Typography key="2" color="text.primary">
+          Избранное
+        </Typography>,
+      </Breadcrumbs>
       <Typography
         style={{ marginTop: "20px" }}
         textAlign={"center"}

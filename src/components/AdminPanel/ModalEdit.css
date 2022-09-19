@@ -1,0 +1,12 @@
+.modal {
+    height: 100%;
+}
+
+.modal-body {
+    overflow: hidden;
+    height: 100%;
+}
+
+.modal-body-text {
+    overflow: auto;
+}

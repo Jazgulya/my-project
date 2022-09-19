@@ -5,6 +5,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
+  Breadcrumbs,
   Button,
   Container,
   Paper,
@@ -15,7 +16,12 @@ import {
   TableHead,
   TableRow,
   Typography,
+  Link
 } from "@mui/material";
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+
+
+
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -41,8 +47,25 @@ const Cart = () => {
       </Typography>
     );
 
+
   return (
-    <Container style={{ marginTop: "100px" }}>
+    <Container style={{ marginTop: "15px" }}>
+
+      <Breadcrumbs
+        separator={<NavigateNextIcon fontSize="small" />}
+        aria-label="breadcrumb"
+      >
+        <Link style={{ cursor: "pointer" }} underline="hover" key="1" color="inherit" onClick={() => navigate("/")}>
+          Главная
+        </Link>,
+        <Link style={{ cursor: "pointer" }} underline="hover" key="1" color="inherit" onClick={() => navigate("/books")}>
+          Список книг
+        </Link>,
+        <Typography key="2" color="text.primary">
+          Корзина
+        </Typography>
+      </Breadcrumbs>
+
       <Typography style={{ textAlign: "center", fontSize: "30px" }}>
         {" "}
         Ваша корзина
